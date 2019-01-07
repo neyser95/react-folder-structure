@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/devtools.js',
+  entry: './client/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'webpack-bundle.js'
@@ -10,28 +10,30 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
             options: {
-              presets: ['react', 'env', 'es2015']
-            }
+              presets: ['react', 'babel-preset-env', 'es2015']
+            },
           }
         ]
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: [
           'style-loader',
-          'css-loader'
+          'css-loader',
+          'sass-loader'
         ]
       }
     ]
-  },
+  }
+  ,
   devServer: {
     contentBase: path.resolve(__dirname, '.'),
     port: 3000,
     open: true,
+    hot: true,
   }
 }
