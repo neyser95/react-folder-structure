@@ -1,7 +1,9 @@
 const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './client/index.js',
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'webpack-bundle.js'
@@ -10,6 +12,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
@@ -35,5 +38,13 @@ module.exports = {
     port: 3000,
     open: true,
     hot: true,
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: './index.html',
+      template: './index.html'
+    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ]
 }
