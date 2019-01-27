@@ -87,7 +87,11 @@ class Tree extends Component {
 
   createChildNodes(children) {
     return children.map((el, i) => {
-      return <Node key={`child${i}`} folder={el} />
+      if (el.children !== undefined) {
+        return <Node key={i} folder={el} children={this.createChildNodes(el.children)} />
+      } else {
+        return <Node key={i} folder={el} />
+      }
     });
   }
 
@@ -103,6 +107,7 @@ class Tree extends Component {
   }
 
   render() {
+    console.log(this.state.directory);
     //* recursion most likely needed to create lower subfolders. Works only for first level.
     const nodes = this.createNodes(this.state.directory);
 
