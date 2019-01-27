@@ -35,7 +35,6 @@ class Tree extends Component {
   
   directoryDepthHelper(childrenArr, item, currentArr) {
     return currentArr.reduce((acc, curr, index, currentArr) => {
-      // console.log(curr, currentArr);
       let childExists = false;
   
       if (item === curr) {
@@ -65,7 +64,7 @@ class Tree extends Component {
     let child = false;
   
     for (let i = 0; i < array.length; i++) {
-      if (array[i].name === element) {
+      if (array[i].name == element) {
         child = array[i];
         return child;
       }
@@ -77,7 +76,7 @@ class Tree extends Component {
   createNodes(directory) {
     return Object.keys(directory).sort((a, b) => a.localeCompare(b)).map((el, i) => {
       el = directory[el];
-      if (el.children !== undefined) {
+      if (el.children.length !== 0) {
         return <Node key={i} folder={el} children={this.createChildNodes(el.children)} />
       } else {
         return <Node key={i} folder={el} />
@@ -87,7 +86,7 @@ class Tree extends Component {
 
   createChildNodes(children) {
     return children.map((el, i) => {
-      if (el.children !== undefined) {
+      if (el.children.length !== 0) {
         return <Node key={i} folder={el} children={this.createChildNodes(el.children)} />
       } else {
         return <Node key={i} folder={el} />
@@ -107,7 +106,6 @@ class Tree extends Component {
   }
 
   render() {
-    console.log(this.state.directory);
     //* recursion most likely needed to create lower subfolders. Works only for first level.
     const nodes = this.createNodes(this.state.directory);
 
