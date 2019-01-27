@@ -4,6 +4,17 @@
   padding: 0px;
 }
 
-#title{
-  color: blue;
+.node{
+  padding: 10px;
+}
+
+.child-nodes{
+  margin-left: 12px;
+  &--hidden{
+    display: none;
+  }
+}
+
+.fa-plus{
+  cursor: pointer;
 }
